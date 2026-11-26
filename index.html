@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b31">
+  <meta name="description" content="Professional profile of Mohammad Sabah Mazzan, an IT technician with experience in technical support, networks, and humanitarian field projects.">
+  <title>Mohammad Sabah Mazzan | IT Technician</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #10243a;
+      --muted: #627389;
+      --blue: #1177c8;
+      --cyan: #64d5ee;
+      --paper: #f5f8fc;
+      --white: #fff;
+      --line: #e1e9f1;
+      --shadow: 0 18px 55px rgba(24, 55, 86, .09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      line-height: 1.8;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar {
+      position: absolute; inset: 0 0 auto; z-index: 2;
+      border-bottom: 1px solid rgba(255,255,255,.13);
+      color: #f7fbff;
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .1px; }
+    .brand-mark { width: 35px; height: 35px; border-radius: 12px; display: grid; place-items: center; color: #071b31; background: linear-gradient(145deg, #9cecff, #2d9bf0); font-size: 15px; }
+    .nav-links { display: flex; gap: 25px; align-items: center; font-size: 14px; color: #e3effb; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--cyan); }
+    .hero {
+      position: relative; min-height: 510px; display: flex; align-items: center;
+      color: white; overflow: hidden;
+      background: #071b31 url("hero.jpg") center 45% / cover no-repeat;
+    }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.78) 52%, rgba(4,17,31,.42)); }
+    .hero-content { position: relative; z-index: 1; padding-block: 130px 76px; max-width: 760px; }
+    .eyebrow { color: #9cecff; font-size: 14px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; }
+    h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.15; margin: 14px 0 8px; letter-spacing: -.8px; }
+    .role { color: #d9ecfa; font-size: clamp(18px, 2.6vw, 23px); margin: 0 0 17px; font-weight: 600; }
+    .intro { max-width: 660px; color: #d1dfed; font-size: 17px; margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 10px 21px; font-size: 14px; font-weight: 800; transition: transform .2s, background .2s; }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: #59cce8; color: #08243d; }
+    .button-quiet { border: 1px solid rgba(255,255,255,.38); color: white; }
+    main { padding: 54px 0 76px; }
+    .section { margin-top: 26px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 19px; }
+    .section-heading h2 { margin: 0; font-size: 25px; line-height: 1.45; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 14px; }
+    .about-card, .card { background: var(--white); border: 1px solid rgba(216,227,238,.9); border-radius: 21px; box-shadow: var(--shadow); }
+    .about-card { padding: 27px 30px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px; }
+    .about-card p { margin: 0; color: #4e6279; font-size: 16px; }
+    .about-tag { flex: 0 0 auto; background: #eaf7fc; color: #1376ad; padding: 8px 15px; border-radius: 999px; font-weight: 800; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+    .card { padding: 24px; }
+    .card-top { display: flex; align-items: center; gap: 13px; margin-bottom: 13px; }
+    .icon { width: 43px; height: 43px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 14px; background: #edf6fd; color: #1279c7; font-size: 20px; font-weight: 900; }
+    .card h3 { font-size: 18px; margin: 0; }
+    .card p { color: var(--muted); font-size: 14px; margin: 0; }
+    .list { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 8px; }
+    .list li { color: #42576d; font-size: 14px; padding-left: 19px; position: relative; }
+    .list li::before { content: ""; position: absolute; left: 0; top: .83em; width: 7px; height: 7px; background: #3cb8d7; border-radius: 50%; }
+    .skills-card { margin-top: 18px; }
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .skill { background: #f0f6fb; border: 1px solid #e1edf6; color: #28465f; border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 700; }
+    .education-card { min-height: 100%; }
+    .education-label { display: inline-flex; margin-top: 12px; color: #1478ac; background: #eaf7fc; border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 800; }
+    .languages { display: grid; gap: 13px; margin-top: 14px; }
+    .language { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: #42576d; font-size: 14px; }
+    .level { color: #1376ad; font-size: 12px; font-weight: 800; background: #eaf7fc; border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+    footer { border-top: 1px solid var(--line); padding: 22px 0 30px; color: #728397; text-align: center; font-size: 12px; }
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 30px, 560px); }
+      .nav { min-height: 68px; }
+      .nav-links { gap: 14px; font-size: 12px; }
+      .nav-links a:nth-child(2) { display: none; }
+      .hero { min-height: 500px; background-position: 57% center; }
+      .hero::before { background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.72)); }
+      .hero-content { padding-top: 122px; }
+      .intro { font-size: 15px; }
+      main { padding-top: 37px; }
+      .grid { grid-template-columns: 1fr; }
+      .about-card { grid-template-columns: 1fr; gap: 15px; padding: 23px; }
+      .about-tag { justify-self: start; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 5px; }
+    }
+    @media (max-width: 420px) {
+      .brand { font-size: 14px; }
+      .nav-links { gap: 11px; }
+      .nav-links a { font-size: 11px; }
+      .hero { min-height: 470px; }
+      .button { padding: 9px 16px; }
+      .card { padding: 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">M</span><span>Professional Profile</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education &amp; Training</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="home" aria-labelledby="page-title">
+    <div class="wrap">
+      <div class="hero-content">
+        <div class="eyebrow">Professional Profile</div>
+        <h1 id="page-title">Mohammad Sabah Mazzan</h1>
+        <p class="role">IT Technician</p>
+        <p class="intro">Bringing together technical support and customer service experience with humanitarian fieldwork, networking, monitoring and evaluation, and community coordination.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#about">Explore My Background</a>
+          <a class="button button-quiet" href="#skills">Professional Skills</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="section" id="about">
+      <div class="section-heading">
+        <h2>Professional Summary</h2>
+        <p>Technical knowledge combined with field experience</p>
+      </div>
+      <div class="about-card">
+        <p>An IT professional with experience in technical support, customer service, computers, and networks. Professional experience also includes managing and implementing humanitarian field projects, monitoring and evaluation, and community coordination.</p>
+        <span class="about-tag">Technology · Coordination · Fieldwork</span>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-heading">
+        <h2>Areas of Experience</h2>
+        <p>Professional fields and responsibilities</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top"><span class="icon" aria-hidden="true">⌘</span><h3>IT &amp; Technical Support</h3></div>
+          <ul class="list">
+            <li>Technical support and customer service</li>
+            <li>Working with computers and networks</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="card-top"><span class="icon" aria-hidden="true">◎</span><h3>Projects &amp; Fieldwork</h3></div>
+          <ul class="list">
+            <li>Managing and implementing humanitarian field projects</li>
+            <li>Monitoring and evaluation; community coordination</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-heading">
+        <h2>Professional Skills</h2>
+        <p>Practical tools and capabilities</p>
+      </div>
+      <article class="card skills-card">
+        <div class="skills" aria-label="Professional skills">
+          <span class="skill">Linux</span>
+          <span class="skill">Microsoft Office</span>
+          <span class="skill">Kobo Toolbox</span>
+          <span class="skill">Networking</span>
+          <span class="skill">Team Management</span>
+          <span class="skill">Technical Support</span>
+          <span class="skill">Monitoring &amp; Evaluation</span>
+          <span class="skill">Community Coordination</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="education">
+      <div class="section-heading">
+        <h2>Education &amp; Training</h2>
+        <p>Academic background and courses</p>
+      </div>
+      <div class="grid">
+        <article class="card education-card">
+          <div class="card-top"><span class="icon" aria-hidden="true">▤</span><h3>Education</h3></div>
+          <p>General Secondary Education</p>
+          <span class="education-label">Academic qualification</span>
+        </article>
+        <article class="card">
+          <div class="card-top"><span class="icon" aria-hidden="true">✦</span><h3>Courses &amp; Training</h3></div>
+          <ul class="list">
+            <li>Digital Security &amp; Information Security</li>
+            <li>First Aid</li>
+            <li>Computer Training &amp; Occupational Safety</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Languages</h2>
+        <p>Communication in Arabic, Turkish, and English</p>
+      </div>
+      <article class="card">
+        <div class="languages">
+          <div class="language"><span>Arabic</span><span class="level">Native</span></div>
+          <div class="language"><span>Turkish</span><span class="level">Good</span></div>
+          <div class="language"><span>English</span><span class="level">Good</span></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer><div class="wrap">© Mohammad Sabah Mazzan — Professional Profile</div></footer>
+</body>
+</html>
