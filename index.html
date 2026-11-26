@@ -67,6 +67,11 @@
     .hero-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 36%; }
     .eyebrow { color: var(--gold-soft); font-size: 14px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; }
     h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.15; margin: 14px 0 8px; letter-spacing: -.8px; }
+    .hero-location { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 9px; margin: 0 0 10px; color: #e3effb; font-size: 14px; }
+    .hero-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: 0 0 13px; color: #d6e5f2; font-size: 14px; }
+    .contact-item { display: inline-flex; align-items: baseline; gap: 7px; }
+    .detail-label { color: var(--gold-soft); font-weight: 700; }
+    .hero-contact a { direction: ltr; unicode-bidi: isolate; text-decoration: underline; text-decoration-color: rgba(210,198,167,.45); text-underline-offset: 3px; }
     .hero-education { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; margin: 0 0 12px; color: #e3effb; font-size: 14px; line-height: 1.45; }
     .hero-education-title { color: var(--gold-soft); font-weight: 700; }
     .hero-education-label { color: #e2dccb; font-size: 12px; border: 1px solid rgba(194,182,149,.25); border-radius: 999px; padding: 2px 9px; }
@@ -117,7 +122,7 @@
       .hero-portrait { order: -1; width: 132px; flex: 0 0 auto; margin: 0 auto 17px; }
       h1 { position: relative; isolation: isolate; }
       h1::before { content: ""; position: absolute; z-index: -1; top: 50%; left: 50%; width: min(76vw, 300px); aspect-ratio: 1.333; transform: translate(-50%, -50%); background: url("syria-emblem.svg") center / contain no-repeat; opacity: .18; pointer-events: none; }
-      .hero-education { justify-content: center; }
+      .hero-location, .hero-contact, .hero-education { justify-content: center; }
       .intro { font-size: 15px; } .hero-actions { justify-content: center; }
       main { padding-top: 37px; }
       .grid { grid-template-columns: 1fr; }
@@ -204,6 +209,11 @@
       <div class="hero-content">
         <div class="eyebrow">Professional Profile</div>
         <h1 id="page-title">Mohammad Sabah Mazzan</h1>
+        <p class="hero-location"><span class="detail-label">Location</span><span>Jisr al-Shughur, Idlib, Syria</span></p>
+        <div class="hero-contact" aria-label="Contact">
+          <span class="contact-item"><span class="detail-label">Email</span><a href="mailto:m.sabah.mazzan@gmail.com"><bdi dir="ltr">m.sabah.mazzan@gmail.com</bdi></a></span>
+          <span class="contact-item"><span class="detail-label">Phone</span><a href="tel:+905393663935"><bdi dir="ltr">+90 539 366 3935</bdi></a></span>
+        </div>
         <div class="hero-education" aria-label="Academic qualification">
           <span class="hero-education-title">Academic qualification</span>
           <span>Idlib University, Faculty of Political Science</span>
@@ -245,6 +255,11 @@
           <ul class="list">
             <li>Technical support and customer service</li>
             <li>Working with computers and networks</li>
+            <li>Technical customer-service administrator at Sham Cash in Sarmada</li>
+            <li>Technical supervision of an internet network in Deir Hassan camps</li>
+            <li>Cybersecurity and information security</li>
+            <li>Penetration testing of computer and mobile devices</li>
+            <li>Application analysis to identify and address security vulnerabilities</li>
           </ul>
         </article>
         <article class="card">
@@ -253,6 +268,7 @@
             <li>Over 10 years with international and local organizations</li> <li><strong>Organizations worked with:</strong> GOAL, Bahar, IYD, NRC, SARD, and Sham Cash; Human Appeal - UK, Ihsan Relief and Development, Ghiras Alnahda USNFP, and Molham Volunteering Team</li>
             <li>Leadership, management, and hands-on field roles</li>
             <li>Managing and implementing humanitarian projects</li>
+            <li>Field risk management and safety compliance</li>
           </ul>
         </article>
         <article class="card">
@@ -288,6 +304,9 @@
           <span class="skill">Networking</span>
           <span class="skill">Team Management</span>
           <span class="skill">Technical Support</span>
+          <span class="skill">Cybersecurity</span>
+          <span class="skill">Security Testing</span>
+          <span class="skill">Vulnerability Analysis</span>
           <span class="skill">Monitoring &amp; Evaluation</span>
           <span class="skill">Community Coordination</span>
           <span class="skill">Cash &amp; Voucher Assistance</span>
@@ -525,6 +544,11 @@
         "Training": "التدريب",
         "Main navigation": "التنقّل الرئيسي",
         "Mohammad Sabah Mazzan": "محمد صباح مظّان",
+        "Location": "الموقع",
+        "Jisr al-Shughur, Idlib, Syria": "سوريا، إدلب، جسر الشغور",
+        "Contact": "للتواصل",
+        "Email": "البريد الإلكتروني",
+        "Phone": "الهاتف",
         "Academic qualification": "المؤهل العلمي",
         "Idlib University, Faculty of Political Science": "جامعة إدلب، كلية العلوم السياسية",
         "IT Technician": "فني تقنية معلومات",
@@ -541,12 +565,18 @@
         "IT & Technical Support": "تقنية المعلومات والدعم الفني",
         "Technical support and customer service": "الدعم الفني وخدمة العملاء",
         "Working with computers and networks": "العمل مع الحواسيب والشبكات",
+        "Technical customer-service administrator at Sham Cash in Sarmada": "أدمن تقني لخدمة العملاء لدى شام كاش في سرمدا",
+        "Technical supervision of an internet network in Deir Hassan camps": "الإشراف التقني على شبكة إنترنت في مخيمات دير حسان",
+        "Cybersecurity and information security": "الأمن السيبراني وأمن المعلومات",
+        "Penetration testing of computer and mobile devices": "اختبار اختراق الحواسيب والأجهزة المحمولة",
+        "Application analysis to identify and address security vulnerabilities": "تحليل التطبيقات لاكتشاف الثغرات الأمنية ومعالجتها",
         "Leadership & Field Operations": "القيادة والعمليات الميدانية",
         "Over 10 years with international and local organizations": "خبرة في العمل الإنساني وتقنية المعلومات",
         "Organizations worked with:": "منظمات عملت معها:",
         "GOAL, Bahar, IYD, NRC, SARD, and Sham Cash; Human Appeal - UK, Ihsan Relief and Development, Ghiras Alnahda USNFP, and Molham Volunteering Team": "GOAL، بهار، IYD، المجلس النرويجي للاجئين (NRC)، SARD، شام كاش، هيومن أبيل - المملكة المتحدة، إحسان للإغاثة والتنمية، غراس النهضة (USNFP)، وفريق ملهم التطوعي",
         "Leadership, management, and hands-on field roles": "أدوار قيادية وإدارية وميدانية مباشرة",
         "Managing and implementing humanitarian projects": "إدارة المشاريع الإنسانية وتنفيذها",
+        "Field risk management and safety compliance": "إدارة المخاطر الميدانية والالتزام بإجراءات السلامة",
         "Humanitarian Program Sectors": "قطاعات البرامج الإنسانية",
         "Electronic cash and voucher assistance": "المساعدات النقدية الإلكترونية والقسائم",
         "Water, Sanitation and Hygiene (WASH); food security": "المياه والإصحاح والنظافة (WASH)؛ والأمن الغذائي",
@@ -560,6 +590,9 @@
         "Networking": "الشبكات",
         "Team Management": "إدارة الفرق",
         "Technical Support": "الدعم الفني",
+        "Cybersecurity": "الأمن السيبراني",
+        "Security Testing": "اختبار الأمان",
+        "Vulnerability Analysis": "تحليل الثغرات",
         "Monitoring & Evaluation": "المتابعة والتقييم",
         "Community Coordination": "التنسيق المجتمعي",
         "Cash & Voucher Assistance": "المساعدات النقدية والقسائم",
@@ -588,13 +621,13 @@
         en: {
           title: 'Mohammad Sabah Mazzan | IT Technician',
           description: 'Professional profile of Mohammad Sabah Mazzan, with 10+ years of experience in humanitarian leadership, management, field operations, IT, and data work.',
-          nav: 'Main navigation', qualification: 'Academic qualification', skills: 'Professional skills',
+          nav: 'Main navigation', qualification: 'Academic qualification', contact: 'Contact', skills: 'Professional skills',
           switchGroup: 'Language selector', enButton: 'English', arButton: 'Switch to Arabic'
         },
         ar: {
           title: 'محمد صباح مظّان | فني تقنية معلومات',
           description: 'الملف المهني لمحمد صباح مظّان، بخبرة تتجاوز 10 سنوات في القيادة والإدارة والعمل الميداني الإنساني وتقنية المعلومات والبيانات.',
-          nav: 'التنقّل الرئيسي', qualification: 'المؤهل العلمي', skills: 'المهارات المهنية',
+          nav: 'التنقّل الرئيسي', qualification: 'المؤهل العلمي', contact: 'للتواصل', skills: 'المهارات المهنية',
           switchGroup: 'اختيار اللغة', enButton: 'الانتقال إلى الإنجليزية', arButton: 'العربية'
         }
       };
@@ -627,6 +660,8 @@
         if (nav) nav.setAttribute('aria-label', info.nav);
         const qualification = document.querySelector('.hero-education[aria-label]');
         if (qualification) qualification.setAttribute('aria-label', info.qualification);
+        const contact = document.querySelector('.hero-contact[aria-label]');
+        if (contact) contact.setAttribute('aria-label', info.contact);
         const skills = document.querySelector('.skills[aria-label]');
         if (skills) skills.setAttribute('aria-label', info.skills);
         const portrait = document.querySelector('.hero-portrait img');
