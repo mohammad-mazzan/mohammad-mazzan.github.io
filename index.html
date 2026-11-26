@@ -76,7 +76,13 @@
     .hero-education-title { color: var(--gold-soft); font-weight: 700; }
     .hero-education-label { color: #e2dccb; font-size: 12px; border: 1px solid rgba(194,182,149,.25); border-radius: 999px; padding: 2px 9px; }
     .role { color: #d9ecfa; font-size: clamp(18px, 2.6vw, 23px); margin: 0 0 17px; font-weight: 600; }
-    .intro { max-width: 660px; color: #d1dfed; font-size: 17px; margin: 0; }
+    .hero-summary { margin-top: 4px; }
+    .hero-summary .section-heading { display: block; margin-bottom: 12px; }
+    .hero-summary .section-heading h2 { font-size: 22px; }
+    .hero-summary .section-heading p { margin-top: 3px; }
+    .hero-summary .about-card { grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 18px 20px; }
+    .hero-summary .about-card p { font-size: 14px; line-height: 1.65; }
+    .hero-summary .about-tag { white-space: nowrap; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
     .button { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 10px 21px; font-size: 14px; font-weight: 800; transition: transform .2s, background .2s; }
     .button:hover { transform: translateY(-2px); }
@@ -123,7 +129,9 @@
       h1 { position: relative; isolation: isolate; }
       h1::before { content: ""; position: absolute; z-index: -1; top: 50%; left: 50%; width: min(76vw, 300px); aspect-ratio: 1.333; transform: translate(-50%, -50%); background: url("syria-emblem.svg") center / contain no-repeat; opacity: .18; pointer-events: none; }
       .hero-location, .hero-contact, .hero-education { justify-content: center; }
-      .intro { font-size: 15px; } .hero-actions { justify-content: center; }
+      .hero-summary .about-card { grid-template-columns: 1fr; }
+      .hero-summary .about-tag { justify-self: center; }
+      .hero-actions { justify-content: center; }
       main { padding-top: 37px; }
       .grid { grid-template-columns: 1fr; }
       .about-card { grid-template-columns: 1fr; gap: 15px; padding: 23px; }
@@ -220,9 +228,18 @@
           
         </div>
         <p class="role">IT Technician</p>
-        <p class="intro">Over 10 years of experience with international and local organizations in leadership, management, and field roles—across humanitarian programs, data work, and IT support.</p>
+        <section class="hero-summary" id="about" aria-labelledby="summary-heading">
+          <div class="section-heading">
+            <h2 id="summary-heading">Professional Summary</h2>
+            <p>Technical knowledge combined with field experience</p>
+          </div>
+          <div class="about-card">
+            <p>A humanitarian and IT professional with more than 10 years of experience in leadership, management, and field roles with international and local organizations. His background includes electronic cash and voucher assistance; Water, Sanitation and Hygiene (WASH); food security; non-food items (NFIs); nutrition; and child and women's protection, alongside data analysis, digital form design, technical support, computer networks, monitoring and evaluation, and community coordination.</p>
+            <span class="about-tag">Humanitarian Response · IT</span>
+          </div>
+        </section>
         <div class="hero-actions">
-          <a class="button button-primary" href="#about">Explore My Background</a>
+          <a class="button button-primary" href="#experience">Explore My Background</a>
           <a class="button button-quiet" href="#skills">Professional Skills</a>
         </div>
       </div>
@@ -233,17 +250,6 @@
   </section>
 
   <main class="wrap">
-    <section class="section" id="about">
-      <div class="section-heading">
-        <h2>Professional Summary</h2>
-        <p>Technical knowledge combined with field experience</p>
-      </div>
-      <div class="about-card">
-        <p>A humanitarian and IT professional with experience in leadership, management, and field roles. Experience spans electronic cash and voucher assistance; Water, Sanitation and Hygiene (WASH); food security; non-food items (NFIs); nutrition; and protection, including child and women's protection. Additional strengths include data analysis, digital form design, monitoring and evaluation, community coordination, technical support, and computer networks.</p>
-        <span class="about-tag">Humanitarian Response · IT</span>
-      </div>
-    </section>
-
     <section class="section" id="experience">
       <div class="section-heading">
         <h2>Areas of Experience</h2>
@@ -265,8 +271,7 @@
         <article class="card">
           <div class="card-top"><span class="icon" aria-hidden="true">◎</span><h3>Leadership &amp; Field Operations</h3></div>
           <ul class="list">
-            <li>Humanitarian and IT experience</li> <li><strong>Organizations worked with:</strong> GOAL, Bahar, IYD, NRC, SARD, and Sham Cash; Human Appeal - UK, Ihsan Relief and Development, Ghiras Alnahda USNFP, and Molham Volunteering Team</li>
-            <li>Leadership, management, and hands-on field roles</li>
+            <li><strong>Organizations worked with:</strong> GOAL, Bahar, IYD, NRC, SARD, and Sham Cash; Human Appeal - UK, Ihsan Relief and Development, Ghiras Alnahda USNFP, and Molham Volunteering Team</li>
             <li>Managing and implementing humanitarian projects</li>
             <li>Field risk management and safety compliance</li>
           </ul>
@@ -552,13 +557,12 @@
         "Academic qualification": "المؤهل العلمي",
         "Idlib University, Faculty of Political Science": "جامعة إدلب، كلية العلوم السياسية",
         "IT Technician": "فني تقنية معلومات",
-        "Over 10 years of experience with international and local organizations in leadership, management, and field roles—across humanitarian programs, data work, and IT support.": "لدي أكثر من 10 سنوات من الخبرة في القيادة والإدارة والعمل الميداني لدى منظمات دولية ومحلية، ضمن البرامج الإنسانية وتحليل البيانات والدعم التقني.",
         "Explore My Background": "استكشف خبراتي",
         "Professional Skills": "المهارات المهنية",
         "Portrait of Mohammad Sabah Mazzan": "صورة محمد صباح مظّان",
         "Professional Summary": "الملخص المهني",
         "Technical knowledge combined with field experience": "معرفة تقنية تجمع بين الخبرة الميدانية",
-        "A humanitarian and IT professional with experience in leadership, management, and field roles. Experience spans electronic cash and voucher assistance; Water, Sanitation and Hygiene (WASH); food security; non-food items (NFIs); nutrition; and protection, including child and women's protection. Additional strengths include data analysis, digital form design, monitoring and evaluation, community coordination, technical support, and computer networks.": "متخصص في العمل الإنساني وتقنية المعلومات، بخبرة في القيادة والإدارة والعمل الميداني. تشمل خبرتي المساعدات النقدية الإلكترونية والقسائم، وقطاعات المياه والإصحاح والنظافة (WASH)، والأمن الغذائي، والمواد غير الغذائية (NFIs)، والتغذية، والحماية بما فيها حماية الطفل والمرأة. كما أتمتع بخبرة في تحليل البيانات وتصميم النماذج الرقمية والمتابعة والتقييم والتنسيق المجتمعي والدعم الفني وشبكات الحاسوب.",
+        "A humanitarian and IT professional with more than 10 years of experience in leadership, management, and field roles with international and local organizations. His background includes electronic cash and voucher assistance; Water, Sanitation and Hygiene (WASH); food security; non-food items (NFIs); nutrition; and child and women's protection, alongside data analysis, digital form design, technical support, computer networks, monitoring and evaluation, and community coordination.": "متخصص في العمل الإنساني وتقنية المعلومات، لديه أكثر من 10 سنوات من الخبرة في القيادة والإدارة والعمل الميداني لدى منظمات دولية ومحلية. تشمل خبرته المساعدات النقدية الإلكترونية والقسائم، وقطاعات المياه والإصحاح والنظافة (WASH)، والأمن الغذائي، والمواد غير الغذائية (NFIs)، والتغذية، وحماية الطفل والمرأة، إلى جانب تحليل البيانات وتصميم النماذج الرقمية والدعم الفني وشبكات الحاسوب والمتابعة والتقييم والتنسيق المجتمعي.",
         "Humanitarian Response · IT": "الاستجابة الإنسانية · تقنية المعلومات",
         "Areas of Experience": "مجالات الخبرة",
         "Professional fields and responsibilities": "المجالات والمسؤوليات المهنية",
@@ -571,10 +575,8 @@
         "Penetration testing of computer and mobile devices": "اختبار اختراق الحواسيب والأجهزة المحمولة",
         "Application analysis to identify and address security vulnerabilities": "تحليل التطبيقات لاكتشاف الثغرات الأمنية ومعالجتها",
         "Leadership & Field Operations": "القيادة والعمليات الميدانية",
-        "Humanitarian and IT experience": "خبرة في العمل الإنساني وتقنية المعلومات",
         "Organizations worked with:": "منظمات عملت معها:",
         "GOAL, Bahar, IYD, NRC, SARD, and Sham Cash; Human Appeal - UK, Ihsan Relief and Development, Ghiras Alnahda USNFP, and Molham Volunteering Team": "GOAL، بهار، IYD، المجلس النرويجي للاجئين (NRC)، SARD، شام كاش، هيومن أبيل - المملكة المتحدة، إحسان للإغاثة والتنمية، غراس النهضة (USNFP)، وفريق ملهم التطوعي",
-        "Leadership, management, and hands-on field roles": "أدوار قيادية وإدارية وميدانية مباشرة",
         "Managing and implementing humanitarian projects": "إدارة المشاريع الإنسانية وتنفيذها",
         "Field risk management and safety compliance": "إدارة المخاطر الميدانية والالتزام بإجراءات السلامة",
         "Humanitarian Program Sectors": "قطاعات البرامج الإنسانية",
