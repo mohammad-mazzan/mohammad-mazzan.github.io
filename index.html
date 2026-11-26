@@ -302,6 +302,8 @@
           y: Math.random() * height,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
+          driftX: Math.cos(angle) * speed,
+          driftY: Math.sin(angle) * speed,
           radius: random(1.4, 2.6),
           phase: Math.random() * Math.PI * 2
         };
@@ -398,8 +400,8 @@
               p.vy += dy * pull;
             }
           }
-          p.vx = Math.max(-0.23, Math.min(0.23, p.vx * 0.998));
-          p.vy = Math.max(-0.23, Math.min(0.23, p.vy * 0.998));
+          p.vx = Math.max(-0.23, Math.min(0.23, p.vx * 0.998 + p.driftX * 0.002));
+          p.vy = Math.max(-0.23, Math.min(0.23, p.vy * 0.998 + p.driftY * 0.002));
           p.x += p.vx;
           p.y += p.vy;
           p.phase += 0.015;
