@@ -363,7 +363,7 @@
           vy: Math.sin(angle) * speed,
           driftX: Math.cos(angle) * speed,
           driftY: Math.sin(angle) * speed,
-          radius: random(1.4, 2.6),
+          radius: random(1.8, 3.3),
           phase: Math.random() * Math.PI * 2
         };
       }
@@ -396,9 +396,9 @@
             const dy = a.y - b.y;
             const distance = Math.hypot(dx, dy);
             if (distance < linkDistance) {
-              const alpha = (1 - distance / linkDistance) * 0.25;
-              ctx.strokeStyle = `rgba(190, 179, 148, ${alpha * 0.72})`;
-              ctx.lineWidth = 0.75;
+              const alpha = (1 - distance / linkDistance) * 0.32;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.85})`;
+              ctx.lineWidth = 0.95;
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
               ctx.lineTo(b.x, b.y);
@@ -412,8 +412,8 @@
             const distance = Math.hypot(dx, dy);
             if (distance < attractionRange) {
               const alpha = (1 - distance / attractionRange) * 0.38;
-              ctx.strokeStyle = `rgba(208, 196, 162, ${alpha * 0.7})`;
-              ctx.lineWidth = 0.9;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.7})`;
+              ctx.lineWidth = 1.1;
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
               ctx.lineTo(pointer.x, pointer.y);
@@ -426,8 +426,8 @@
           const pulse = reducedMotion.matches ? 0 : Math.sin(p.phase) * 0.22;
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius + pulse, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(204, 192, 160, 0.64)';
-          ctx.shadowColor = 'rgba(179, 164, 124, 0.32)';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.32)';
           ctx.shadowBlur = 6;
           ctx.fill();
           ctx.shadowBlur = 0;
@@ -435,8 +435,8 @@
 
         if (pointer.active && !reducedMotion.matches) {
           const glow = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 40);
-          glow.addColorStop(0, 'rgba(208, 196, 162, 0.11)');
-          glow.addColorStop(1, 'rgba(208, 196, 162, 0)');
+          glow.addColorStop(0, 'rgba(255, 255, 255, 0.11)');
+          glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
           ctx.fillStyle = glow;
           ctx.beginPath();
           ctx.arc(pointer.x, pointer.y, 40, 0, Math.PI * 2);
