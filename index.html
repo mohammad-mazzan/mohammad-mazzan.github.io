@@ -41,13 +41,15 @@
     .nav-links a { transition: color .2s ease; }
     .nav-links a:hover { color: var(--cyan); }
     .hero {
-      position: relative; min-height: 510px; display: flex; align-items: center;
+      position: relative; isolation: isolate; min-height: 510px; display: flex; align-items: center;
       color: white; overflow: hidden;
       background: #071b31 url("hero.jpg") center 45% / cover no-repeat;
     }
-    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.78) 52%, rgba(4,17,31,.42)); }
-    .particle-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
-    .hero-layout { position: relative; z-index: 1; width: min(1120px, calc(100% - 40px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) 270px; align-items: center; gap: clamp(28px, 5vw, 64px); }
+    .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.78) 52%, rgba(4,17,31,.42)); }
+    /* Subtle watermark: the Syrian national emblem introduced in 2025. */
+    .hero::after { content: ""; position: absolute; z-index: 1; top: 50%; right: clamp(12px, 6vw, 88px); width: min(42vw, 430px); aspect-ratio: 1.333; transform: translateY(-50%); background: url("syria-emblem.svg") center / contain no-repeat; opacity: .11; pointer-events: none; }
+    .particle-canvas { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; opacity: .88; }
+    .hero-layout { position: relative; z-index: 3; width: min(1120px, calc(100% - 40px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) 270px; align-items: center; gap: clamp(28px, 5vw, 64px); }
     .hero-content { position: relative; z-index: 1; padding-block: 130px 76px; max-width: 760px; }
     .hero-portrait { width: min(100%, 270px); aspect-ratio: 1; justify-self: center; margin: 0; overflow: hidden; border: 5px solid rgba(255,255,255,.78); border-radius: 50%; background: #dfe8ef; box-shadow: 0 18px 52px rgba(0,0,0,.28), 0 0 0 12px rgba(255,255,255,.08); }
     .hero-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 36%; }
@@ -94,6 +96,7 @@
       .nav-links a:nth-child(2) { display: none; }
       .hero { min-height: 0; background-position: 57% center; }
       .hero::before { background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.72)); }
+      .hero::after { top: 31%; right: 50%; width: min(76vw, 300px); transform: translate(50%, -50%); opacity: .085; }
       .hero-layout { display: flex; flex-direction: column; align-items: center; gap: 0; width: min(100% - 30px, 560px); padding: 92px 0 34px; }
       .hero-content { padding: 0; max-width: 100%; text-align: center; }
       .hero-portrait { order: -1; width: 132px; flex: 0 0 auto; margin: 0 auto 17px; }
@@ -293,13 +296,13 @@
 
       function makeParticle() {
         const angle = Math.random() * Math.PI * 2;
-        const speed = random(0.035, 0.13);
+        const speed = random(0.045, 0.155);
         return {
           x: Math.random() * width,
           y: Math.random() * height,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          radius: random(1.15, 2.25),
+          radius: random(1.4, 2.6),
           phase: Math.random() * Math.PI * 2
         };
       }
@@ -360,12 +363,12 @@
         }
 
         for (const p of particles) {
-          const pulse = reducedMotion.matches ? 0 : Math.sin(p.phase) * 0.35;
+          const pulse = reducedMotion.matches ? 0 : Math.sin(p.phase) * 0.22;
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius + pulse, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(109, 229, 248, 0.92)';
-          ctx.shadowColor = 'rgba(54, 205, 238, 0.78)';
-          ctx.shadowBlur = 9;
+          ctx.fillStyle = 'rgba(109, 229, 248, 0.84)';
+          ctx.shadowColor = 'rgba(54, 205, 238, 0.58)';
+          ctx.shadowBlur = 6;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
@@ -395,11 +398,11 @@
               p.vy += dy * pull;
             }
           }
-          p.vx = Math.max(-0.2, Math.min(0.2, p.vx * 0.998));
-          p.vy = Math.max(-0.2, Math.min(0.2, p.vy * 0.998));
+          p.vx = Math.max(-0.23, Math.min(0.23, p.vx * 0.998));
+          p.vy = Math.max(-0.23, Math.min(0.23, p.vy * 0.998));
           p.x += p.vx;
           p.y += p.vy;
-          p.phase += 0.018;
+          p.phase += 0.015;
           if (p.x < -8) p.x = width + 8;
           if (p.x > width + 8) p.x = -8;
           if (p.y < -8) p.y = height + 8;
