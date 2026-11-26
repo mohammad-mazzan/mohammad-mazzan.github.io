@@ -47,7 +47,7 @@
     }
     .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.78) 52%, rgba(4,17,31,.42)); }
     /* Subtle watermark: the Syrian national emblem introduced in 2025. */
-    .hero::after { content: ""; position: absolute; z-index: 1; top: 50%; right: clamp(12px, 6vw, 88px); width: min(42vw, 430px); aspect-ratio: 1.333; transform: translateY(-50%); background: url("syria-emblem.svg") center / contain no-repeat; opacity: .11; pointer-events: none; }
+    .hero::after { content: ""; position: absolute; z-index: 1; top: 50%; left: 50%; width: min(42vw, 430px); aspect-ratio: 1.333; transform: translate(-50%, -50%); background: url("syria-emblem.svg") center / contain no-repeat; opacity: .19; pointer-events: none; }
     .particle-canvas { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; pointer-events: none; opacity: .88; }
     .hero-layout { position: relative; z-index: 3; width: min(1120px, calc(100% - 40px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) 270px; align-items: center; gap: clamp(28px, 5vw, 64px); }
     .hero-content { position: relative; z-index: 1; padding-block: 130px 76px; max-width: 760px; }
@@ -55,6 +55,9 @@
     .hero-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 36%; }
     .eyebrow { color: #9cecff; font-size: 14px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; }
     h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.15; margin: 14px 0 8px; letter-spacing: -.8px; }
+    .hero-education { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; margin: 0 0 12px; color: #e3effb; font-size: 14px; line-height: 1.45; }
+    .hero-education-title { color: #9cecff; font-weight: 700; }
+    .hero-education-label { color: #d3e7f6; font-size: 12px; border: 1px solid rgba(156,236,255,.32); border-radius: 999px; padding: 2px 9px; }
     .role { color: #d9ecfa; font-size: clamp(18px, 2.6vw, 23px); margin: 0 0 17px; font-weight: 600; }
     .intro { max-width: 660px; color: #d1dfed; font-size: 17px; margin: 0; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
@@ -96,10 +99,13 @@
       .nav-links a:nth-child(2) { display: none; }
       .hero { min-height: 0; background-position: 57% center; }
       .hero::before { background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.72)); }
-      .hero::after { top: 31%; right: 50%; width: min(76vw, 300px); transform: translate(50%, -50%); opacity: .085; }
+      .hero::after { display: none; }
       .hero-layout { display: flex; flex-direction: column; align-items: center; gap: 0; width: min(100% - 30px, 560px); padding: 92px 0 34px; }
       .hero-content { padding: 0; max-width: 100%; text-align: center; }
       .hero-portrait { order: -1; width: 132px; flex: 0 0 auto; margin: 0 auto 17px; }
+      h1 { position: relative; isolation: isolate; }
+      h1::before { content: ""; position: absolute; z-index: -1; top: 50%; left: 50%; width: min(76vw, 300px); aspect-ratio: 1.333; transform: translate(-50%, -50%); background: url("syria-emblem.svg") center / contain no-repeat; opacity: .18; pointer-events: none; }
+      .hero-education { justify-content: center; }
       .intro { font-size: 15px; } .hero-actions { justify-content: center; }
       main { padding-top: 37px; }
       .grid { grid-template-columns: 1fr; }
@@ -131,7 +137,7 @@
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
-        <a href="#education">Education &amp; Training</a>
+        <a href="#education">Training</a>
       </div>
     </nav>
   </header>
@@ -142,6 +148,11 @@
       <div class="hero-content">
         <div class="eyebrow">Professional Profile</div>
         <h1 id="page-title">Mohammad Sabah Mazzan</h1>
+        <div class="hero-education" aria-label="Education">
+          <span class="hero-education-title">Education</span>
+          <span>Idlib University, Faculty of Political Science</span>
+          <span class="hero-education-label">Academic qualification</span>
+        </div>
         <p class="role">IT Technician</p>
         <p class="intro">Over 10 years of experience with international and local organizations in leadership, management, and field roles—across humanitarian programs, data work, and IT support.</p>
         <div class="hero-actions">
@@ -236,26 +247,19 @@
 
     <section class="section" id="education">
       <div class="section-heading">
-        <h2>Education &amp; Training</h2>
-        <p>Academic background and courses</p>
+        <h2>Courses &amp; Training</h2>
+        <p>Professional courses and certificates</p>
       </div>
-      <div class="grid">
-        <article class="card education-card">
-          <div class="card-top"><span class="icon" aria-hidden="true">▤</span><h3>Education</h3></div>
-          <p>Idlib University, Faculty of Political Science</p>
-          <span class="education-label">Academic qualification</span>
-        </article>
-        <article class="card">
-          <div class="card-top"><span class="icon" aria-hidden="true">✦</span><h3>Courses &amp; Training</h3></div>
-          <ul class="list">
-            <li>ICDL (International Computer Driving Licence)</li>
-            <li>Other professional certificates in relevant work areas</li>
-            <li>Digital Security &amp; Information Security</li>
-            <li>First Aid</li>
-            <li>Computer Training &amp; Occupational Safety</li>
-          </ul>
-        </article>
-      </div>
+      <article class="card">
+        <div class="card-top"><span class="icon" aria-hidden="true">✦</span><h3>Courses &amp; Training</h3></div>
+        <ul class="list">
+          <li>ICDL (International Computer Driving Licence)</li>
+          <li>Other professional certificates in relevant work areas</li>
+          <li>Digital Security &amp; Information Security</li>
+          <li>First Aid</li>
+          <li>Computer Training &amp; Occupational Safety</li>
+        </ul>
+      </article>
     </section>
 
     <section class="section">
