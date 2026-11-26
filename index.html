@@ -138,6 +138,32 @@
       .button { padding: 9px 16px; }
       .card { padding: 21px; }
     }
+
+    .language-switch { display: inline-flex; align-items: center; gap: 4px; padding-inline-start: 12px; border-inline-start: 1px solid rgba(194,182,149,.25); }
+    .language-button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 34px; padding: 5px 8px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: #e3effb; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+    .language-button:hover, .language-button:focus-visible { border-color: rgba(194,182,149,.42); outline: none; }
+    .language-button[aria-pressed="true"] { border-color: rgba(194,182,149,.4); background: rgba(184,170,136,.14); color: #fff; }
+    .flag-icon { display: block; width: 19px; height: 13px; flex: 0 0 auto; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,.3); }
+    html[lang="ar"] body { font-family: "Noto Sans Arabic", "Noto Naskh Arabic", "Segoe UI", Tahoma, Arial, sans-serif; }
+    html[lang="ar"] h1 { letter-spacing: 0; }
+    html[dir="rtl"] .list li { padding-left: 0; padding-right: 19px; }
+    html[dir="rtl"] .list li::before { left: auto; right: 0; }
+    @media (max-width: 720px) {
+      .language-switch { gap: 2px; padding-inline-start: 8px; }
+      .language-button { gap: 4px; padding: 5px 6px; font-size: 11px; }
+      .flag-icon { width: 17px; height: 12px; }
+    }
+    @media (max-width: 420px) {
+      .nav { gap: 4px; }
+      .brand { gap: 5px; font-size: 10px; }
+      .brand-mark { width: 29px; height: 29px; border-radius: 10px; }
+      .nav-links { gap: 5px; }
+      .nav-links a { font-size: 9px; }
+      .nav-links a[href="#education"] { display: none; }
+      .language-switch { gap: 1px; padding-inline-start: 5px; }
+      .language-button { gap: 3px; min-height: 30px; padding: 4px 5px; font-size: 9px; }
+      .flag-icon { width: 15px; height: 10px; }
+    }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
   </style>
 </head>
@@ -148,6 +174,24 @@
       <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">M</span><span>Professional Profile</span></a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <div class="language-switch" role="group" aria-label="Language selector">
+          <button class="language-button" type="button" data-language="en" aria-label="English" aria-pressed="true" title="English">
+            <svg class="flag-icon" viewBox="0 0 19 13" aria-hidden="true" focusable="false">
+              <rect width="19" height="13" fill="#fff"/>
+              <path fill="#b22234" d="M0 0h19v1H0zm0 2h19v1H0zm0 2h19v1H0zm0 2h19v1H0zm0 2h19v1H0zm0 2h19v1H0zm0 2h19v1H0z"/>
+              <rect width="8" height="7" fill="#3c3b6e"/>
+              <g fill="#fff"><circle cx="1.2" cy="1.1" r=".28"/><circle cx="3" cy="1.1" r=".28"/><circle cx="4.8" cy="1.1" r=".28"/><circle cx="6.6" cy="1.1" r=".28"/><circle cx="2.1" cy="2.4" r=".28"/><circle cx="3.9" cy="2.4" r=".28"/><circle cx="5.7" cy="2.4" r=".28"/><circle cx="1.2" cy="3.7" r=".28"/><circle cx="3" cy="3.7" r=".28"/><circle cx="4.8" cy="3.7" r=".28"/><circle cx="6.6" cy="3.7" r=".28"/><circle cx="2.1" cy="5" r=".28"/><circle cx="3.9" cy="5" r=".28"/><circle cx="5.7" cy="5" r=".28"/><circle cx="1.2" cy="6.2" r=".28"/><circle cx="3" cy="6.2" r=".28"/><circle cx="4.8" cy="6.2" r=".28"/><circle cx="6.6" cy="6.2" r=".28"/></g>
+            </svg><span>EN</span>
+          </button>
+          <button class="language-button" type="button" data-language="ar" aria-label="Arabic" aria-pressed="false" title="Arabic">
+            <svg class="flag-icon" viewBox="0 0 19 13" aria-hidden="true" focusable="false">
+              <rect width="19" height="4.34" fill="#007a3d"/>
+              <rect y="4.33" width="19" height="4.34" fill="#fff"/>
+              <rect y="8.66" width="19" height="4.34" fill="#000"/>
+              <g fill="#ce1126"><path d="m4.25 5.45.34.73.8.09-.59.55.16.79-.71-.4-.71.4.16-.79-.59-.55.8-.09z"/><path d="m9.5 5.45.34.73.8.09-.59.55.16.79-.71-.4-.71.4.16-.79-.59-.55.8-.09z"/><path d="m14.75 5.45.34.73.8.09-.59.55.16.79-.71-.4-.71.4.16-.79-.59-.55.8-.09z"/></g>
+            </svg><span>AR</span>
+          </button>
+        </div>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#education">Training</a>
@@ -469,6 +513,141 @@
 
 
       resize();
+    })();
+  </script>
+  <script>
+    (() => {
+      const translations = {
+        "Professional Profile": "الملف المهني",
+        "About": "نبذة",
+        "Experience": "الخبرات",
+        "Skills": "المهارات",
+        "Training": "التدريب",
+        "Main navigation": "التنقّل الرئيسي",
+        "Mohammad Sabah Mazzan": "محمد صباح مزّان",
+        "Academic qualification": "المؤهل العلمي",
+        "Idlib University, Faculty of Political Science": "جامعة إدلب، كلية العلوم السياسية",
+        "IT Technician": "فني تقنية معلومات",
+        "Over 10 years of experience with international and local organizations in leadership, management, and field roles—across humanitarian programs, data work, and IT support.": "أمتلك أكثر من 10 سنوات من الخبرة مع منظمات دولية ومحلية في القيادة والإدارة والعمل الميداني، ضمن البرامج الإنسانية وتحليل البيانات والدعم التقني.",
+        "Explore My Background": "استكشف خبراتي",
+        "Professional Skills": "المهارات المهنية",
+        "Portrait of Mohammad Sabah Mazzan": "صورة محمد صباح مزّان",
+        "Professional Summary": "الملخص المهني",
+        "Technical knowledge combined with field experience": "معرفة تقنية تجمع بين الخبرة الميدانية",
+        "A humanitarian and IT professional with over 10 years of experience working with international and local organizations in leadership, management, and field roles. Experience spans electronic cash and voucher assistance; Water, Sanitation and Hygiene (WASH); food security; non-food items (NFIs); nutrition; and protection, including child and women's protection. Additional strengths include data analysis, digital form design, monitoring and evaluation, community coordination, technical support, and computer networks.": "متخصص في العمل الإنساني وتقنية المعلومات، أمتلك أكثر من 10 سنوات من الخبرة مع منظمات دولية ومحلية في القيادة والإدارة والعمل الميداني. تشمل خبرتي المساعدات النقدية والإلكترونية والقسائم، وقطاعات المياه والإصحاح والنظافة (WASH)، والأمن الغذائي، والمواد غير الغذائية (NFIs)، والتغذية، والحماية بما فيها حماية الطفل والمرأة. كما أتمتع بخبرة في تحليل البيانات وتصميم النماذج الرقمية والمتابعة والتقييم والتنسيق المجتمعي والدعم الفني وشبكات الحاسوب.",
+        "10+ Years · Humanitarian Response · IT": "أكثر من 10 سنوات · الاستجابة الإنسانية · تقنية المعلومات",
+        "Areas of Experience": "مجالات الخبرة",
+        "Professional fields and responsibilities": "المجالات والمسؤوليات المهنية",
+        "IT & Technical Support": "تقنية المعلومات والدعم الفني",
+        "Technical support and customer service": "الدعم الفني وخدمة العملاء",
+        "Working with computers and networks": "العمل مع الحواسيب والشبكات",
+        "Leadership & Field Operations": "القيادة والعمليات الميدانية",
+        "Over 10 years with international and local organizations": "أكثر من 10 سنوات مع منظمات دولية ومحلية",
+        "Organizations worked with:": "منظمات عملت معها:",
+        "Leadership, management, and hands-on field roles": "أدوار قيادية وإدارية وميدانية مباشرة",
+        "Managing and implementing humanitarian projects": "إدارة المشاريع الإنسانية وتنفيذها",
+        "Humanitarian Program Sectors": "قطاعات البرامج الإنسانية",
+        "Electronic cash and voucher assistance": "المساعدات النقدية والإلكترونية والقسائم",
+        "Water, Sanitation and Hygiene (WASH); food security": "المياه والإصحاح والنظافة (WASH)؛ والأمن الغذائي",
+        "Non-food items (NFIs) and nutrition": "المواد غير الغذائية (NFIs) والتغذية",
+        "Protection, including child and women's protection": "الحماية، بما فيها حماية الطفل والمرأة",
+        "Data & Digital Tools": "البيانات والأدوات الرقمية",
+        "Data analysis and digital form design": "تحليل البيانات وتصميم النماذج الرقمية",
+        "Monitoring and evaluation; community coordination": "المتابعة والتقييم؛ والتنسيق المجتمعي",
+        "Kobo Toolbox and Microsoft Office": "Kobo Toolbox وMicrosoft Office",
+        "Practical tools and capabilities": "الأدوات والقدرات العملية",
+        "Networking": "الشبكات",
+        "Team Management": "إدارة الفرق",
+        "Technical Support": "الدعم الفني",
+        "Monitoring & Evaluation": "المتابعة والتقييم",
+        "Community Coordination": "التنسيق المجتمعي",
+        "Cash & Voucher Assistance": "المساعدات النقدية والقسائم",
+        "WASH": "المياه والإصحاح والنظافة (WASH)",
+        "Food Security": "الأمن الغذائي",
+        "Nutrition & Protection": "التغذية والحماية",
+        "Data Analysis": "تحليل البيانات",
+        "Digital Form Design": "تصميم النماذج الرقمية",
+        "Professional courses and certificates": "الدورات والشهادات المهنية",
+        "Courses & Training": "الدورات والتدريب",
+        "ICDL (International Computer Driving Licence)": "ICDL (الرخصة الدولية لقيادة الحاسوب)",
+        "Other professional certificates in relevant work areas": "شهادات مهنية أخرى في مجالات العمل ذات الصلة",
+        "Digital Security & Information Security": "الأمن الرقمي وأمن المعلومات",
+        "First Aid": "الإسعافات الأولية",
+        "Computer Training & Occupational Safety": "التدريب على الحاسوب والسلامة المهنية",
+        "Languages": "اللغات",
+        "Communication in Arabic, Turkish, and English": "التواصل بالعربية والتركية والإنجليزية",
+        "Arabic": "العربية",
+        "Native": "اللغة الأم",
+        "Turkish": "التركية",
+        "Good": "جيد",
+        "English": "الإنجليزية",
+        "© Mohammad Sabah Mazzan — Professional Profile": "© محمد صباح مزّان — الملف المهني"
+      };
+      const languageInfo = {
+        en: {
+          title: 'Mohammad Sabah Mazzan | IT Technician',
+          description: 'Professional profile of Mohammad Sabah Mazzan, with 10+ years of experience in humanitarian leadership, management, field operations, IT, and data work.',
+          nav: 'Main navigation', qualification: 'Academic qualification', skills: 'Professional skills',
+          switchGroup: 'Language selector', enButton: 'English', arButton: 'Switch to Arabic'
+        },
+        ar: {
+          title: 'محمد صباح مزّان | فني تقنية معلومات',
+          description: 'الملف المهني لمحمد صباح مزّان، بخبرة تتجاوز 10 سنوات في القيادة والإدارة والعمل الميداني الإنساني وتقنية المعلومات والبيانات.',
+          nav: 'التنقّل الرئيسي', qualification: 'المؤهل العلمي', skills: 'المهارات المهنية',
+          switchGroup: 'اختيار اللغة', enButton: 'الانتقال إلى الإنجليزية', arButton: 'العربية'
+        }
+      };
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          if (node.parentElement && node.parentElement.closest('script, style, svg')) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      const textNodes = [];
+      while (walker.nextNode()) textNodes.push({ node: walker.currentNode, original: walker.currentNode.nodeValue });
+
+      function setLanguage(language) {
+        const lang = language === 'ar' ? 'ar' : 'en';
+        const info = languageInfo[lang];
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        for (const item of textNodes) {
+          const original = item.original;
+          const leading = original.match(/^\s*/)[0];
+          const trailing = original.match(/\s*$/)[0];
+          const core = original.slice(leading.length, original.length - trailing.length);
+          item.node.nodeValue = leading + (lang === 'ar' && translations[core] ? translations[core] : core) + trailing;
+        }
+        document.title = info.title;
+        const description = document.querySelector('meta[name="description"]');
+        if (description) description.content = info.description;
+        const nav = document.querySelector('nav[aria-label]');
+        if (nav) nav.setAttribute('aria-label', info.nav);
+        const qualification = document.querySelector('.hero-education[aria-label]');
+        if (qualification) qualification.setAttribute('aria-label', info.qualification);
+        const skills = document.querySelector('.skills[aria-label]');
+        if (skills) skills.setAttribute('aria-label', info.skills);
+        const portrait = document.querySelector('.hero-portrait img');
+        if (portrait) portrait.alt = lang === 'ar' ? 'صورة محمد صباح مزّان' : 'Portrait of Mohammad Sabah Mazzan';
+        const switcher = document.querySelector('.language-switch');
+        if (switcher) switcher.setAttribute('aria-label', info.switchGroup);
+        document.querySelectorAll('.language-button').forEach(button => {
+          const active = button.dataset.language === lang;
+          button.setAttribute('aria-pressed', String(active));
+          const label = button.dataset.language === 'en' ? (lang === 'ar' ? info.enButton : 'English') : (lang === 'ar' ? info.arButton : 'Switch to Arabic');
+          button.setAttribute('aria-label', label);
+          button.title = label;
+        });
+        try { localStorage.setItem('resume-language', lang); } catch (_) {}
+      }
+
+      document.querySelectorAll('.language-button').forEach(button => {
+        button.addEventListener('click', () => setLanguage(button.dataset.language));
+      });
+      let savedLanguage = 'en';
+      try { savedLanguage = localStorage.getItem('resume-language') === 'ar' ? 'ar' : 'en'; } catch (_) {}
+      setLanguage(savedLanguage);
     })();
   </script>
   <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e20ab9a4ca5444b3a6a3c79fbc6c4c83"}'></script><!-- End Cloudflare Web Analytics -->
