@@ -46,7 +46,10 @@
       background: #071b31 url("hero.jpg") center 45% / cover no-repeat;
     }
     .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.78) 52%, rgba(4,17,31,.42)); }
+    .hero-layout { position: relative; z-index: 1; width: min(1120px, calc(100% - 40px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) 270px; align-items: center; gap: clamp(28px, 5vw, 64px); }
     .hero-content { position: relative; z-index: 1; padding-block: 130px 76px; max-width: 760px; }
+    .hero-portrait { width: min(100%, 270px); aspect-ratio: 1; justify-self: center; margin: 0; overflow: hidden; border: 5px solid rgba(255,255,255,.78); border-radius: 50%; background: #dfe8ef; box-shadow: 0 18px 52px rgba(0,0,0,.28), 0 0 0 12px rgba(255,255,255,.08); }
+    .hero-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 36%; }
     .eyebrow { color: #9cecff; font-size: 14px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; }
     h1 { font-size: clamp(40px, 7vw, 68px); line-height: 1.15; margin: 14px 0 8px; letter-spacing: -.8px; }
     .role { color: #d9ecfa; font-size: clamp(18px, 2.6vw, 23px); margin: 0 0 17px; font-weight: 600; }
@@ -90,7 +93,9 @@
       .nav-links a:nth-child(2) { display: none; }
       .hero { min-height: 500px; background-position: 57% center; }
       .hero::before { background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.72)); }
+      .hero-layout { grid-template-columns: minmax(0,1fr) 132px; gap: 18px; }
       .hero-content { padding-top: 122px; }
+      .hero-portrait { width: 132px; }
       .intro { font-size: 15px; }
       main { padding-top: 37px; }
       .grid { grid-template-columns: 1fr; }
@@ -104,6 +109,10 @@
       .nav-links { gap: 11px; }
       .nav-links a { font-size: 11px; }
       .hero { min-height: 470px; }
+      .hero-layout { grid-template-columns: 1fr; gap: 0; }
+      .hero-portrait { width: 92px; justify-self: start; margin: 96px 0 9px; }
+      .hero-content { padding: 0 0 42px; }
+      h1 { font-size: clamp(36px, 10vw, 44px); }
       .button { padding: 9px 16px; }
       .card { padding: 21px; }
     }
@@ -124,7 +133,7 @@
   </header>
 
   <section class="hero" id="home" aria-labelledby="page-title">
-    <div class="wrap">
+    <div class="hero-layout">
       <div class="hero-content">
         <div class="eyebrow">Professional Profile</div>
         <h1 id="page-title">Mohammad Sabah Mazzan</h1>
@@ -135,6 +144,9 @@
           <a class="button button-quiet" href="#skills">Professional Skills</a>
         </div>
       </div>
+      <figure class="hero-portrait">
+        <img src="profile.jpg" alt="Portrait of Mohammad Sabah Mazzan" loading="eager">
+      </figure>
     </div>
   </section>
 
