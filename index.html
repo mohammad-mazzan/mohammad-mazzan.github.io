@@ -46,6 +46,7 @@
       background: #071b31 url("hero.jpg") center 45% / cover no-repeat;
     }
     .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,17,31,.88), rgba(5,31,57,.78) 52%, rgba(4,17,31,.42)); }
+    .particle-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
     .hero-layout { position: relative; z-index: 1; width: min(1120px, calc(100% - 40px)); margin-inline: auto; display: grid; grid-template-columns: minmax(0, 1fr) 270px; align-items: center; gap: clamp(28px, 5vw, 64px); }
     .hero-content { position: relative; z-index: 1; padding-block: 130px 76px; max-width: 760px; }
     .hero-portrait { width: min(100%, 270px); aspect-ratio: 1; justify-self: center; margin: 0; overflow: hidden; border: 5px solid rgba(255,255,255,.78); border-radius: 50%; background: #dfe8ef; box-shadow: 0 18px 52px rgba(0,0,0,.28), 0 0 0 12px rgba(255,255,255,.08); }
@@ -133,6 +134,7 @@
   </header>
 
   <section class="hero" id="home" aria-labelledby="page-title">
+    <canvas class="particle-canvas" aria-hidden="true"></canvas>
     <div class="hero-layout">
       <div class="hero-content">
         <div class="eyebrow">Professional Profile</div>
@@ -268,7 +270,197 @@
     </section>
   </main>
 
-  <footer><div class="wrap">© Mohammad Sabah Mazzan — Professional Profile</div></footer>  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e20ab9a4ca5444b3a6a3c79fbc6c4c83"}'></script><!-- End Cloudflare Web Analytics -->
+  <footer><div class="wrap">© Mohammad Sabah Mazzan — Professional Profile</div></footer>
+
+  <script>
+    (() => {
+      const hero = document.querySelector('.hero');
+      const canvas = document.querySelector('.particle-canvas');
+      const ctx = canvas.getContext('2d', { alpha: true });
+      if (!ctx) return;
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const pointer = { x: 0, y: 0, active: false };
+      const particles = [];
+      let width = 0;
+      let height = 0;
+      let frame = 0;
+      let visible = true;
+      let pixelRatio = 1;
+      let linkDistance = 140;
+
+      const random = (min, max) => min + Math.random() * (max - min);
+
+      function makeParticle() {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = random(0.035, 0.13);
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          radius: random(1.15, 2.25),
+          phase: Math.random() * Math.PI * 2
+        };
+      }
+
+      function resize() {
+        const bounds = hero.getBoundingClientRect();
+        width = Math.max(1, bounds.width);
+        height = Math.max(1, bounds.height);
+        pixelRatio = Math.min(window.devicePixelRatio || 1, width < 600 ? 1.5 : 2);
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        linkDistance = width < 600 ? 112 : 145;
+
+        const count = Math.max(18, Math.min(72, Math.round(width * height / (width < 600 ? 14500 : 12500))));
+        while (particles.length < count) particles.push(makeParticle());
+        while (particles.length > count) particles.pop();
+        draw();
+        start();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        const attractionRange = Math.min(220, linkDistance * 1.55);
+
+        for (let i = 0; i < particles.length; i++) {
+          const a = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const b = particles[j];
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance < linkDistance) {
+              const alpha = (1 - distance / linkDistance) * 0.25;
+              ctx.strokeStyle = `rgba(74, 211, 239, ${alpha})`;
+              ctx.lineWidth = 0.75;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+
+          if (pointer.active && !reducedMotion.matches) {
+            const dx = pointer.x - a.x;
+            const dy = pointer.y - a.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance < attractionRange) {
+              const alpha = (1 - distance / attractionRange) * 0.38;
+              ctx.strokeStyle = `rgba(94, 224, 247, ${alpha})`;
+              ctx.lineWidth = 0.9;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(pointer.x, pointer.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        for (const p of particles) {
+          const pulse = reducedMotion.matches ? 0 : Math.sin(p.phase) * 0.35;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius + pulse, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(109, 229, 248, 0.92)';
+          ctx.shadowColor = 'rgba(54, 205, 238, 0.78)';
+          ctx.shadowBlur = 9;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+
+        if (pointer.active && !reducedMotion.matches) {
+          const glow = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, 40);
+          glow.addColorStop(0, 'rgba(95, 224, 247, 0.18)');
+          glow.addColorStop(1, 'rgba(95, 224, 247, 0)');
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(pointer.x, pointer.y, 40, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function animate() {
+        frame = 0;
+        if (!visible || document.hidden || reducedMotion.matches) return;
+        for (const p of particles) {
+          if (pointer.active) {
+            const dx = pointer.x - p.x;
+            const dy = pointer.y - p.y;
+            const distance = Math.hypot(dx, dy);
+            if (distance < 190 && distance > 1) {
+              const pull = (1 - distance / 190) * 0.003;
+              p.vx += dx * pull;
+              p.vy += dy * pull;
+            }
+          }
+          p.vx = Math.max(-0.2, Math.min(0.2, p.vx * 0.998));
+          p.vy = Math.max(-0.2, Math.min(0.2, p.vy * 0.998));
+          p.x += p.vx;
+          p.y += p.vy;
+          p.phase += 0.018;
+          if (p.x < -8) p.x = width + 8;
+          if (p.x > width + 8) p.x = -8;
+          if (p.y < -8) p.y = height + 8;
+          if (p.y > height + 8) p.y = -8;
+        }
+        draw();
+        frame = window.requestAnimationFrame(animate);
+      }
+
+      function start() {
+        if (!frame && visible && !document.hidden && !reducedMotion.matches) {
+          frame = window.requestAnimationFrame(animate);
+        }
+      }
+
+      function updatePointer(event) {
+        const bounds = hero.getBoundingClientRect();
+        pointer.x = event.clientX - bounds.left;
+        pointer.y = event.clientY - bounds.top;
+        pointer.active = true;
+        if (reducedMotion.matches) return;
+        if (!frame) start();
+      }
+
+      hero.addEventListener('pointermove', updatePointer, { passive: true });
+      hero.addEventListener('pointerleave', () => { pointer.active = false; }, { passive: true });
+      hero.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'touch') updatePointer(event);
+      }, { passive: true });
+      hero.addEventListener('pointerup', event => {
+        if (event.pointerType === 'touch') pointer.active = false;
+      }, { passive: true });
+      window.addEventListener('resize', resize, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (frame) window.cancelAnimationFrame(frame);
+          frame = 0;
+        } else {
+          draw();
+          start();
+        }
+      });
+      reducedMotion.addEventListener?.('change', () => {
+        if (reducedMotion.matches && frame) window.cancelAnimationFrame(frame);
+        frame = 0;
+        draw();
+        start();
+      });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(entries => {
+          visible = entries[0].isIntersecting;
+          if (!visible && frame) window.cancelAnimationFrame(frame);
+          frame = 0;
+          if (visible) start();
+        }).observe(hero);
+      }
+
+      resize();
+    })();
+  </script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e20ab9a4ca5444b3a6a3c79fbc6c4c83"}'></script><!-- End Cloudflare Web Analytics -->
 
 </body>
 </html>
