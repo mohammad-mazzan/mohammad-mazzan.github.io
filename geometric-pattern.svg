@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="156" height="156" viewBox="0 0 156 156" fill="none">
+  <g stroke="#d7b96f" stroke-opacity=".62" stroke-width=".85">
+    <path d="M78 1 155 78 78 155 1 78 78 1Z"/>
+    <path d="M78 18 138 78 78 138 18 78 78 18Z"/>
+    <path d="M78 37 119 78 78 119 37 78 78 37Z"/>
+    <path d="M78 50 86 70 106 78 86 86 78 106 70 86 50 78 70 70 78 50Z"/>
+    <path d="M1 1 78 78 155 1M1 155 78 78 155 155"/>
+    <path d="M78 1V18M78 138V155M1 78H18M138 78H155"/>
+    <circle cx="78" cy="78" r="3"/>
+  </g>
+</svg>
