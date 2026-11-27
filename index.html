@@ -737,6 +737,7 @@
       let lastSoundAt = -Infinity;
       let width = 0, height = 0, frame = 0;
       const touchPoints = new Map();
+      const recentStarts = [];
 
       function resize() {
         width = Math.max(1, window.innerWidth);
@@ -782,8 +783,9 @@
         if (!context || reducedMotion.matches || !Number.isFinite(x) || !Number.isFinite(y)) return;
         ripples.push({ x, y, started: performance.now() });
         if (ripples.length > 12) ripples.shift();
-        if (CSS.supports('backdrop-filter', 'url(#water-refraction-filter)') ||
-            CSS.supports('-webkit-backdrop-filter', 'url(#water-refraction-filter)')) {
+        if (window.CSS && typeof CSS.supports === 'function' &&
+            (CSS.supports('backdrop-filter', 'url(#water-refraction-filter)') ||
+             CSS.supports('-webkit-backdrop-filter', 'url(#water-refraction-filter)'))) {
           const layer = document.createElement('div');
           layer.className = 'water-refraction';
           layer.setAttribute('aria-hidden', 'true');
@@ -805,13 +807,29 @@
         try { audio.currentTime = 0; audio.play().catch(() => {}); } catch (_) {}
       }
 
+      function startRipple(source, x, y) {
+        const now = performance.now();
+        while (recentStarts.length && now - recentStarts[0].time > 300) recentStarts.shift();
+        const duplicate = recentStarts.findIndex(start => start.source !== source &&
+          Math.abs(start.x - x) < 12 && Math.abs(start.y - y) < 12);
+        if (duplicate !== -1) {
+          recentStarts.splice(duplicate, 1);
+          return;
+        }
+        recentStarts.push({ source, x, y, time: now });
+        addRipple(x, y);
+        playDroplet();
+      }
+
       // Passive touch listeners preserve normal scrolling, links and language buttons.
+      document.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'touch') startRipple('pointer', event.clientX, event.clientY);
+      }, { passive: true });
       document.addEventListener('touchstart', event => {
         for (const touch of event.changedTouches) {
           touchPoints.set(touch.identifier, { x: touch.clientX, y: touch.clientY, time: performance.now() });
-          addRipple(touch.clientX, touch.clientY);
+          startRipple('touch', touch.clientX, touch.clientY);
         }
-        playDroplet();
       }, { passive: true });
       document.addEventListener('touchmove', event => {
         for (const touch of event.changedTouches) {
