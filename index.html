@@ -188,7 +188,7 @@
       pointer-events: none; z-index: 10;
     }
     .water-refraction {
-      position: fixed; left: 0; top: 0; width: 220px; height: 220px;
+      position: fixed; left: 0; top: 0; width: 170px; height: 170px;
       z-index: 9; pointer-events: none; border-radius: 50%;
       -webkit-backdrop-filter: url(#water-refraction-filter);
       backdrop-filter: url(#water-refraction-filter);
@@ -755,12 +755,12 @@
           const progress = (now - ripple.started) / duration;
           if (progress >= 1) { ripples.splice(i, 1); continue; }
           const t = Math.max(0, progress);
-          const radius = 4 + t * 96;
+          const radius = 3 + t * 72;
           const fade = t < 0.48 ? 1 : Math.pow((1 - t) / 0.52, 1.5);
           // The highlights are individual crests of the same outward-moving wave.
           for (const fraction of [0.34, 0.55, 0.74, 0.93]) {
             const ringRadius = Math.max(2, radius * fraction);
-            const waveWidth = 2.4 + fraction * 1.0;
+            const waveWidth = 1.8 + fraction * 0.75;
             const gradient = context.createRadialGradient(ripple.x, ripple.y,
               Math.max(0, ringRadius - waveWidth), ripple.x, ripple.y, ringRadius + waveWidth);
             gradient.addColorStop(0, 'rgba(185, 235, 245, 0)');
